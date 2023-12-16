@@ -30,7 +30,7 @@ class NotesController {
 
     await knex("notes_tags").insert(tagsInsert);
 
-    res.json();
+    return res.json();
   }
 
   async show(req, res) {
@@ -52,7 +52,7 @@ class NotesController {
     const { id } = req.params;
 
     await knex("notes").where({ id }).delete();
-    return response.json();
+    return res.json();
   }
 
   async index(req, res) {
