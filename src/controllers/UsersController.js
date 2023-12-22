@@ -42,7 +42,7 @@ class UsersController {
   }
 
   async update(req, res) {
-    const { name, email, password, old_password, avatar } = req.body;
+    const { name, email, password, old_password } = req.body;
     const user_id = req.user.id;
 
     const database = await sqliteConnection();

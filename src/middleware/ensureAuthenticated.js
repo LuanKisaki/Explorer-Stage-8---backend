@@ -1,10 +1,9 @@
 const { verify } = require("jsonwebtoken");
 const AppError = require("../utils/AppError");
 const authConfig = require("../configs/auth");
-const { request } = require("express");
 
 function ensureAuthenticated(req, res, next) {
-  const authHeader = request.headers.authorization;
+  const authHeader = req.headers.authorization;
 
   if (!authHeader) {
     throw new AppError("JWT Token não informado", 401);
