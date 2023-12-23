@@ -18,7 +18,7 @@ function ensureAuthenticated(req, res, next) {
       id: Number(user_id),
     };
 
-    console.log("Autorizado pelo Middleware");
+    // console.log("Autorizado pelo Middleware");
     return next();
   } catch {
     throw new AppError("JWT Token inválido", 401);
