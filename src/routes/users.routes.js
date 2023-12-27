@@ -15,6 +15,9 @@ const userAvatarController = new UserAvatarController();
 
 usersRoutes.post("/", usersController.create);
 usersRoutes.put("/", ensureAuthenticated, usersController.update);
-usersRoutes.patch( "/avatar",  ensureAuthenticated,  upload.single("avatar_"), userAvatarController.update); // patch é usado para atualizar um campo específico.
+usersRoutes.patch( "/avatar",  ensureAuthenticated,  upload.single("avatar_"), 
+// (req, res) => {console.log(req.file.filename); res.json();});
+
+userAvatarController.update); // patch é usado para atualizar um campo específico.
 
 module.exports = usersRoutes;

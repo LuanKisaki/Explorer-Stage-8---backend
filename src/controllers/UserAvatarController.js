@@ -5,7 +5,7 @@ const AppError = require("../utils/AppError");
 class UserAvatarController {
   async update(req, res) {
     const user_id = req.user.id;
-    const avatarFileName = req.file.fileName;
+    const avatarFileName = req.file.filename; //(property) Express.Multer.File.filename: string
 
     const diskStorage = new DiskStorage();
 
