@@ -12,16 +12,16 @@ migrationsRun();
 const app = express();
 app.use(express.json());
 
-app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER))
+app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER));
 app.use(routes);
 
 // database();
 
-app.use(( error, req, res, next ) => {
-  if(error instanceof AppError) {
+app.use((error, req, res, next) => {
+  if (error instanceof AppError) {
     return res.status(error.statusCode).json({
       status: "error",
-      message: error.message
+      message: error.message,
     });
   }
 
@@ -34,33 +34,43 @@ app.use(( error, req, res, next ) => {
 });
 
 // ROUTE criada com resposta enviada em tela (via http)
-app.get("/hello", (request, response) => { response.send("Hello, World!") })
-app.get("/dev", (request, response) => { response.send("Luan Kisaki") })
-app.get("/route_01", (request, response) => { response.send("Rota 01 criada") })
-app.get("/route_final", (request, response) => { response.send("Rota final") })
+app.get("/hello", (request, response) => {
+  response.send("Hello, World!");
+});
+app.get("/dev", (request, response) => {
+  response.send("Luan Kisaki");
+});
+app.get("/route_01", (request, response) => {
+  response.send("Rota 01 criada");
+});
+app.get("/route_final", (request, response) => {
+  response.send("Rota final");
+});
 
-// a partir daqui utilizarei 'req' no lugar de 'request' e 'res' no lugar de 'response' 
+// a partir daqui utilizarei 'req' no lugar de 'request' e 'res' no lugar de 'response'
 
 // ROUTE PARAMS criada com o parâmetro 'id' com resposta e parâmetro enviada em tela (via http)
-app.get("/route_final/:id", (req, res) => { res.send(`Rota final com parâmetro :id (${req.params.id})`) })
+app.get("/route_final/:id", (req, res) => {
+  res.send(`Rota final com parâmetro :id (${req.params.id})`);
+});
 
 // ROUTE PARAMS criada com o parâmetro 'id' com resposta e parâmetro em mais camadas enviada em tela (via http)
 //app.get("/route_final/:id/:user", (req, res) => { res.send(`id: ${req.params.id} para o usuário: ${req.params.user}.`) })
 
 // ROUTE PARAMS desestruturar request.params
 app.get("/route_final/:id/:user", (req, res) => {
-  const { id, user } = req.params
+  const { id, user } = req.params;
 
-  res.send(`id: ${id} para o usuário: ${user}.`)
-})
+  res.send(`id: ${id} para o usuário: ${user}.`);
+});
 
 //   app.get("/users", (req, res) => {
 //     const { page, limit } = req.query;
-    
+
 //     res.send(`Query Params: Página: ${page}, Limite: ${limit}`)
 
 //     // para passar os valores em Query Params via http. /users?page=2&limit=10
 // })
 
 const port = 3344;
-app.listen(port, () => console.log(`Server is running on Port ${port}`))
+app.listen(port, () => console.log(`Server is running on Port ${port}`));
